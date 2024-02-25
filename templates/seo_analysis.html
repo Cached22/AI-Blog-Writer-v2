@@ -1,0 +1,86 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <!-- Navigation bar, can be included from a separate file for consistency -->
+    </header>
+    <main>
+        <section class="seo-analysis">
+            <h1>SEO Analysis</h1>
+            <p>Analyze your blog's SEO optimization, originality, and check for potential plagiarism.</p>
+            <form id="seoAnalysisForm">
+                <label for="contentInput">Paste your blog content here:</label>
+                <textarea id="contentInput" name="content" rows="10" placeholder="Enter blog content..."></textarea>
+                
+                <label for="urlInput">Or enter the URL of your blog:</label>
+                <input type="url" id="urlInput" name="url" placeholder="Enter blog URL...">
+                
+                <button type="button" id="analyzeButton">Analyze</button>
+            </form>
+            <div id="analysisResults" class="hidden">
+                <h2>Analysis Results</h2>
+                <div id="seoReport">
+                    <!-- SEO report will be populated here -->
+                </div>
+                <div id="originalityCheck">
+                    <!-- Originality check results will be populated here -->
+                </div>
+                <div id="plagiarismWarnings">
+                    <!-- Plagiarism warnings will be populated here -->
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- Footer content, can be included from a separate file for consistency -->
+    </footer>
+    <script>
+        document.getElementById('analyzeButton').addEventListener('click', function() {
+            const content = document.getElementById('contentInput').value;
+            const url = document.getElementById('urlInput').value;
+            const resultsContainer = document.getElementById('analysisResults');
+            
+            // Clear previous results
+            resultsContainer.classList.add('hidden');
+            document.getElementById('seoReport').innerHTML = '';
+            document.getElementById('originalityCheck').innerHTML = '';
+            document.getElementById('plagiarismWarnings').innerHTML = '';
+
+            // Perform AJAX call to backend for SEO analysis
+            fetch('/analyze-seo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ content: content, url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Populate the results
+                if (data.seo_report) {
+                    document.getElementById('seoReport').innerHTML = data.seo_report;
+                }
+                if (data.originality_check) {
+                    document.getElementById('originalityCheck').innerHTML = data.originality_check;
+                }
+                if (data.plagiarism_warnings) {
+                    document.getElementById('plagiarismWarnings').innerHTML = data.plagiarism_warnings;
+                }
+                resultsContainer.classList.remove('hidden');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+```

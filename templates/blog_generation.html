@@ -1,0 +1,68 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Generation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Blog Generation</h1>
+        <form id="blogGenerationForm">
+            <div class="input-group">
+                <label for="keywordInput">Enter Keywords:</label>
+                <input type="text" id="keywordInput" name="keywords" placeholder="e.g., Python, Web Development" required>
+            </div>
+            <div class="input-group">
+                <label for="sourceSelect">Content Source:</label>
+                <select id="sourceSelect" name="source">
+                    <option value="manual">Manual Input</option>
+                    <option value="google_serp">Google SERP</option>
+                    <option value="youtube">YouTube</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="structureSelect">Blog Structure:</label>
+                <select id="structureSelect" name="structure">
+                    <option value="listicle">Listicle</option>
+                    <option value="guide">Guide</option>
+                    <option value="faq">FAQ</option>
+                </select>
+            </div>
+            <button type="button" id="addSectionButton">Add Section</button>
+            <button type="submit" id="generateButton">Generate</button>
+        </form>
+        <div id="blogPreview" contenteditable="true">
+            <!-- Generated blog content will appear here -->
+        </div>
+        <div class="editing-tools">
+            <button onclick="formatText('bold')">Bold</button>
+            <button onclick="formatText('italic')">Italic</button>
+            <button onclick="formatText('underline')">Underline</button>
+            <button onclick="insertList('unordered')">Bullet List</button>
+            <button onclick="insertList('ordered')">Numbered List</button>
+        </div>
+        <div class="save-options">
+            <button id="saveDraftButton">Save Draft</button>
+            <button id="downloadButton">Download</button>
+            <button id="seoAnalysisButton">SEO Analysis</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('blogGenerationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            generateBlogContent();
+        });
+        document.getElementById('addSectionButton').addEventListener('click', addCustomSection);
+        document.getElementById('saveDraftButton').addEventListener('click', saveDraft);
+        document.getElementById('downloadButton').addEventListener('click', downloadContent);
+        document.getElementById('seoAnalysisButton').addEventListener('click', function() {
+            window.location.href = '/templates/seo_analysis.html';
+        });
+    </script>
+</body>
+</html>
+```
