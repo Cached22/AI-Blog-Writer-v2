@@ -1,0 +1,82 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Tools</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <!-- Navigation bar content -->
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <!-- Hero content -->
+        </section>
+        <section id="research">
+            <h2>Web and Academic Research</h2>
+            <form id="researchForm">
+                <label for="researchQueryInput">Enter your research query:</label>
+                <input type="text" id="researchQueryInput" name="query" placeholder="Type your query here..." required>
+                
+                <label for="sourceSelect">Select research source:</label>
+                <select id="sourceSelect" name="source">
+                    <option value="news">News</option>
+                    <option value="academic">Academic Papers</option>
+                    <option value="trends">Trending Topics</option>
+                </select>
+                
+                <button type="submit" id="searchButton">Search</button>
+            </form>
+            <div id="researchResults">
+                <!-- Results will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- Footer content -->
+    </footer>
+    <script>
+        document.getElementById('researchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const query = document.getElementById('researchQueryInput').value;
+            const source = document.getElementById('sourceSelect').value;
+            fetch('/perform_research', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query, source: source })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsContainer = document.getElementById('researchResults');
+                resultsContainer.innerHTML = ''; // Clear previous results
+                data.forEach(result => {
+                    const resultCard = document.createElement('div');
+                    resultCard.className = 'result-card';
+                    resultCard.innerHTML = `
+                        <h3>${result.title}</h3>
+                        <p>${result.summary}</p>
+                        <a href="${result.link}" target="_blank">Read more</a>
+                        <button onclick="addToBlogDraft('${result.summary}')">Add to Blog Draft</button>
+                    `;
+                    resultsContainer.appendChild(resultCard);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function addToBlogDraft(summary) {
+            // Function to add research findings to blog draft
+            // Implementation depends on how blog drafts are managed in the app
+        }
+    </script>
+</body>
+</html>
+```

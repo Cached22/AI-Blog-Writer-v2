@@ -1,0 +1,70 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata & Postprocessing</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/main.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Blog Metadata & Postprocessing</h1>
+        <form id="metadataForm">
+            <div class="form-group">
+                <label for="blogTitle">Blog Title:</label>
+                <input type="text" id="blogTitle" name="title" placeholder="Enter blog title">
+            </div>
+            <div class="form-group">
+                <label for="blogCategory">Blog Category:</label>
+                <input type="text" id="blogCategory" name="category" placeholder="Enter blog category">
+            </div>
+            <div class="form-group">
+                <label for="blogDescription">Meta Description:</label>
+                <textarea id="blogDescription" name="description" placeholder="Enter meta description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="blogTags">Tags:</label>
+                <input type="text" id="blogTags" name="tags" placeholder="Enter tags, separated by commas">
+            </div>
+            <button type="button" id="saveMetadata" onclick="updateMetadata()">Save Metadata</button>
+        </form>
+        <div id="postprocessingTools">
+            <button type="button" onclick="proofreadContent()">Proofread Content</button>
+            <button type="button" onclick="convertToMarkdown()">Convert to Markdown</button>
+            <button type="button" onclick="convertToHTML()">Convert to HTML</button>
+            <button type="button" onclick="saveToFile()">Save to File</button>
+        </div>
+        <div id="publishOptions">
+            <button type="button" onclick="downloadContent()">Download Content</button>
+            <button type="button" onclick="uploadToWordpress()">Publish to WordPress</button>
+        </div>
+    </div>
+    <script>
+        // Functions to handle metadata and postprocessing actions
+        function updateMetadata() {
+            // AJAX call to backend to update metadata
+        }
+        function proofreadContent() {
+            // AJAX call to backend to proofread content
+        }
+        function convertToMarkdown() {
+            // AJAX call to backend to convert content to Markdown
+        }
+        function convertToHTML() {
+            // AJAX call to backend to convert Markdown to HTML
+        }
+        function saveToFile() {
+            // AJAX call to backend to save content to file
+        }
+        function downloadContent() {
+            // Function to handle content download
+        }
+        function uploadToWordpress() {
+            // AJAX call to backend to upload content to WordPress
+        }
+    </script>
+</body>
+</html>
+```
